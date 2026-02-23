@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astro Thesaurus — Orbital Mechanics Engine</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Michroma&family=Space+Mono:wght@400;700&family=Syne:wght@700;800&display=swap');
+
+:root {
+  --bg: #02030a;
+  --panel: rgba(6,10,28,0.7);
+  --border: rgba(80,120,255,0.2);
+  --accent: #4f7cff;
+  --accent2: #ff4f9a;
+  --accent3: #4fffb0;
+  --text: #e8eeff;
+  --muted: #4a5a88;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  cursor: crosshair;
+  overflow: hidden;
+}
+
+#starfield {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  z-index:0; pointer-events:none;
+}
+
+.layout {
+  position: relative; z-index:1;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 64px 1fr;
+  height: 100vh;
+}
+
+/* ── HEADER ── */
+header {
+  grid-column: 1/-1;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(2,3,10,0.85);
+  backdrop-filter: blur(20px);
+}
+
+.h-left { display:flex; align-items:center; gap:14px; }
+.logo { font-family:'Syne',sans-serif; font-size:22px; font-weight:800;
+  background: linear-gradient(90deg,#fff 0%,var(--accent) 50%,var(--accent2) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.badge { font-family:'Michroma',sans-serif; font-size:9px; letter-spacing:3px;
+  color:var(--accent); border:1px solid var(--border); padding:3px 10px; border-radius:2px; }
+
+.h-right { display:flex; align-items:center; gap:20px; }
+.h-stat { text-align:right; }
+.h-stat .lbl { font-size:8px; letter-spacing:2px; color:var(--muted); display:block; }
+.h-stat .val { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:var(--accent3); }
+
+/* ── SIDEBAR ── */
+#sidebar {
+  grid-column:1; grid-row:2;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  display: flex; flex-direction:column;
+  overflow: hidden;
+}
+
+.sidebar-scroll { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:16px; }
+.sidebar-scroll::-webkit-scrollbar { width:3px; }
+.sidebar-scroll::-webkit-scrollbar-thumb { background:var(--border); }
+
+.sec-title {
+  font-family:'Michroma',sans-serif; font-size:8px;
+  letter-spacing:3px; color:var(--accent);
+  text-transform:uppercase; padding-bottom:8px;
+  border-bottom:1px solid var(--border); margin-bottom:4px;
+}
+
+/* Prompt */
+#prompt-input {
+  width:100%; background:rgba(0,0,0,0.5);
+  border:1px solid var(--border); border-radius:4px;
+  color:var(--text); font-family:'Space Mono',monospace;
+  font-size:12px; padding:10px 12px; resize:none;
+  min-height:58px; outline:none; transition:border-color 0.3s;
+}
+#prompt-input:focus { border-color:var(--accent); }
+#prompt-input::placeholder { color:var(--muted); }
+
+#go-btn {
+  width:100%; margin-top:8px;
+  background:linear-gradient(45deg,#4f7cff,#305acc);
+  border:none; border-radius:4px; color:#fff;
+  font-family:'Michroma',sans-serif; font-size:11px;
+  letter-spacing:2px; padding:11px; cursor:pointer;
+  text-transform:uppercase; transition:all 0.2s;
+}
+#go-btn:hover { box-shadow:0 0 18px rgba(79,124,255,0.5); transform:translateY(-1px); }
+
+/* Scenario grid */
+.scenario-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+.chip {
+  padding:7px 6px; border:1px solid var(--border);
+  border-radius:4px; background:rgba(0,0,0,0.35);
+  color:var(--muted); font-size:9px; cursor:pointer;
+  transition:all 0.2s; text-align:center; line-height:1.5;
+}
+.chip:hover { border-color:var(--accent); color:var(--text); background:rgba(79,124,255,0.1); }
+.chip.active { border-color:var(--accent3); color:var(--accent3); background:rgba(79,255,176,0.08); }
+.chip-icon { display:block; font-size:14px; margin-bottom:2px; }
+
+/* Controls */
+.ctrl-row { display:flex; gap:6px; }
+.ctrl-btn {
+  flex:1; padding:7px 4px; border:1px solid var(--border);
+  border-radius:4px; background:rgba(0,0,0,0.35);
+  color:var(--muted); font-family:'Space Mono',monospace;
+  font-size:9px; cursor:pointer; transition:all 0.2s;
+  letter-spacing:1px; text-align:center;
+}
+.ctrl-btn:hover { border-color:var(--accent); color:var(--text); }
+.ctrl-btn.on { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+.slider-wrap { display:flex; flex-direction:column; gap:5px; }
+.slider-label { display:flex; justify-content:space-between;
+  font-size:9px; color:var(--muted); letter-spacing:1px; }
+input[type=range] { width:100%; accent-color:var(--accent); height:3px; }
+
+/* Object type colors legend */
+.type-legend { display:flex; flex-wrap:wrap; gap:6px; }
+.tleg { display:flex; align-items:center; gap:5px; font-size:9px; color:var(--muted); }
+.tleg-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+
+/* Object list */
+#obj-list { display:flex; flex-direction:column; gap:3px; max-height:160px; overflow-y:auto; }
+.obj-item {
+  display:flex; align-items:center; gap:7px;
+  padding:5px 7px; border-radius:3px; background:rgba(0,0,0,0.25);
+  font-size:9px; color:var(--muted);
+}
+.obj-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.obj-name { flex:1; }
+.obj-mass { color:#1a2540; }
+
+/* ── CANVAS AREA ── */
+#canvas-area {
+  grid-column:2; grid-row:2;
+  position:relative; background:#000005;
+  overflow:hidden;
+}
+
+#sim-canvas { display:block; width:100%; height:100%; }
+
+.ov { position:absolute; pointer-events:none; font-family:'Michroma',sans-serif; }
+.ov-tl { top:14px; left:16px; font-size:9px; letter-spacing:3px;
+  color:rgba(79,124,255,0.35); text-transform:uppercase; }
+.ov-tr { top:14px; right:16px; font-size:9px; color:rgba(79,124,255,0.35);
+  text-align:right; line-height:2; }
+#scenario-title {
+  position:absolute; bottom:18px; left:50%; transform:translateX(-50%);
+  font-family:'Syne',sans-serif; font-size:32px; font-weight:800;
+  color:rgba(255,255,255,0.04); letter-spacing:4px; white-space:nowrap;
+  text-transform:uppercase;
+}
+#desc-bar {
+  position:absolute; bottom:14px; left:16px;
+  font-size:9px; letter-spacing:2px; color:rgba(79,124,255,0.35);
+}
+
+/* Empty state */
+#empty {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  text-align:center; pointer-events:none;
+}
+#empty .big { font-size:72px; opacity:0.06; }
+#empty p { font-size:10px; color:var(--muted); letter-spacing:3px; margin-top:16px; }
+
+/* Type color map */
+.type-star       { color: #ffe484; }
+.type-planet     { color: #4f7cff; }
+.type-blackhole  { color: #cc44ff; }
+.type-neutron    { color: #00ffff; }
+.type-dwarf      { color: #eeeeff; }
+.type-giant      { color: #ff6622; }
+.type-galaxy     { color: #4f7cff; }
+.type-gas        { color: #ff8844; }
+.type-debris     { color: #888888; }
+.type-asteroid   { color: #aaaaaa; }
+.type-jet        { color: #aaffff; }
+.type-spacecraft { color: #ffffff; }
+.type-comet      { color: #aaffff; }
+.type-moon       { color: #aaaaaa; }
+.type-accretion  { color: #ffaa00; }
+.type-darkmatter { color: #8800cc; }
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<div class="layout">
+  <header>
+    <div class="h-left">
+      <div class="logo">Astro Thesaurus</div>
+      <div class="badge">Orbital Mechanics Engine v3.1</div>
+    </div>
+    <div class="h-right">
+      <div class="h-stat"><span class="lbl">SCENARIO</span><span class="val" id="h-scenario">—</span></div>
+      <div class="h-stat"><span class="lbl">OBJECTS</span><span class="val" id="h-objects">0</span></div>
+      <div class="h-stat"><span class="lbl">TICK</span><span class="val" id="h-tick">0</span></div>
+      <div class="h-stat"><span class="lbl">FPS</span><span class="val" id="h-fps">—</span></div>
+    </div>
+  </header>
+
+  <div id="sidebar">
+    <div class="sidebar-scroll">
+
+      <!-- Prompt -->
+      <div>
+        <div class="sec-title">Natural Language Input</div>
+        <textarea id="prompt-input" placeholder="e.g. show me a pulsar with jets..."></textarea>
+        <button id="go-btn">⚛ Launch Simulation</button>
+      </div>
+
+      <!-- Scenarios -->
+      <div>
+        <div class="sec-title">Orbital Mechanics Library</div>
+        <div class="scenario-grid" id="chip-grid"></div>
+      </div>
+
+      <!-- Controls -->
+      <div>
+        <div class="sec-title">Playback</div>
+        <div class="ctrl-row" style="margin-bottom:6px">
+          <button class="ctrl-btn on" id="play-btn">⏸ PAUSE</button>
+          <button class="ctrl-btn" id="reset-btn">↺ RESET</button>
+        </div>
+        <div class="ctrl-row" style="margin-bottom:10px">
+          <button class="ctrl-btn on" id="trail-btn">◎ TRAILS</button>
+          <button class="ctrl-btn on" id="glow-btn">✦ GLOW</button>
+          <button class="ctrl-btn on" id="label-btn">⌖ LABELS</button>
+        </div>
+        <div class="slider-wrap" style="margin-bottom:8px">
+          <div class="slider-label"><span>SPEED</span><span id="speed-val">3x</span></div>
+          <input type="range" id="speed-slider" min="1" max="12" value="3">
+        </div>
+        <div class="slider-wrap">
+          <div class="slider-label"><span>TRAIL FADE</span><span id="trail-val">medium</span></div>
+          <input type="range" id="trail-slider" min="1" max="10" value="4">
+        </div>
+      </div>
+
+      <!-- Type legend -->
+      <div>
+        <div class="sec-title">Object Types</div>
+        <div class="type-legend">
+          <div class="tleg"><div class="tleg-dot" style="background:#ffe484"></div>Star</div>
+          <div class="tleg"><div class="tleg-dot" style="background:#4f7cff"></div>Planet</div>
+          <div class="tleg"><div class="tleg-dot" style="background:#cc44ff"></div>Black Hole</div>
+          <div class="tleg"><div class="tleg-dot" style="background:#00ffff"></div>Neutron</div>
+          <div class="tleg"><div class="tleg-dot" style="background:#ff6622"></div>Giant</div>
+          <div class="tleg"><div class="tleg-dot" style="background:#ffaa00"></div>Accretion</div>
+          <div class="tleg"><div class="tleg-dot" style="background:#ff8844"></div>Gas/Dust</div>
+          <div class="tleg"><div class="tleg-dot" style="background:#aaaaaa"></div>Debris</div>
+          <div class="tleg"><div class="tleg-dot" style="background:#aaffff"></div>Jet</div>
+          <div class="tleg"><div class="tleg-dot" style="background:#8800cc"></div>Dark Matter</div>
+        </div>
+      </div>
+
+      <!-- Object list -->
+      <div>
+        <div class="sec-title">Active Objects</div>
+        <div id="obj-list"><div style="font-size:10px;color:var(--muted)">No simulation loaded</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Canvas -->
+  <div id="canvas-area">
+    <canvas id="sim-canvas"></canvas>
+    <div class="ov ov-tl">ASTRO THESAURUS // N-BODY PHYSICS</div>
+    <div class="ov ov-tr" id="ov-tr">AWAITING INPUT<br>SELECT A SCENARIO</div>
+    <div id="scenario-title">ASTRO THESAURUS</div>
+    <div id="desc-bar"></div>
+    <div id="empty">
+      <div class="big">🌌</div>
+      <p>SELECT A SCENARIO TO BEGIN SIMULATION</p>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+// ── STARFIELD ──────────────────────────────────────────────────
+(function(){
+  var c = document.getElementById('starfield');
+  var ctx = c.getContext('2d');
+  var stars = [];
+  function resize(){ c.width=window.innerWidth; c.height=window.innerHeight; }
+  function init(){
+    stars=[];
+    for(var i=0;i<300;i++) stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4,a:Math.random(),s:Math.random()*0.4+0.04});
+  }
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i]; s.a+=s.s*0.01;
+      var al=((Math.sin(s.a)+1)/2)*0.7+0.08;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(180,200,255,'+al+')'; ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  resize(); init(); draw();
+  window.addEventListener('resize',function(){ resize(); init(); });
+})();
+
+// ── GLOBALS ───────────────────────────────────────────────────
+var canvas = document.getElementById('sim-canvas');
+var ctx = canvas.getContext('2d');
+var astroData = {};
+var simState = {
+  objects: [], originals: [],
+  playing: false, showTrails: true, showGlow: true, showLabels: true,
+  speed: 3, trailAlpha: 0.12,
+  G: 0.4, tick: 0, animId: null,
+  currentKey: '', description: ''
+};
+var fpsCount=0, fpsLast=Date.now(), fps=0;
+
+// Type → glow size multiplier
+var TYPE_GLOW = {
+  'star':3.5,'giant':4,'sun':4,'blackhole':6,'neutron':5,
+  'dwarf':3,'planet':2.5,'galaxy':5,'gas':2,'debris':1.5,
+  'asteroid':1.5,'jet':3,'spacecraft':2,'comet':4,'moon':2,
+  'accretion':3,'darkmatter':4
+};
+
+// ── RESIZE ────────────────────────────────────────────────────
+function resizeCanvas(){
+  var area = document.getElementById('canvas-area');
+  canvas.width = area.offsetWidth;
+  canvas.height = area.offsetHeight;
+}
+
+// ── LOAD DATA ─────────────────────────────────────────────────
+function loadData(cb){
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET','/astro-data.json',true);
+  xhr.onload = function(){
+    if(xhr.status===200){ astroData=JSON.parse(xhr.responseText); cb(); }
+  };
+  xhr.send();
+}
+
+// ── BUILD CHIPS ───────────────────────────────────────────────
+var CHIP_META = {
+  'binary system':      { icon:'⭐', label:'Binary System'      },
+  'contact binary':     { icon:'🔴', label:'Contact Binary'     },
+  'eccentric binary':   { icon:'🌀', label:'Eccentric Binary'   },
+  'solar system':       { icon:'🪐', label:'Solar System'       },
+  'three body':         { icon:'🔺', label:'Three Body'         },
+  'figure-8 orbit':     { icon:'∞',  label:'Figure-8 Orbit'    },
+  'lagrange points':    { icon:'⚖', label:'Lagrange Points'    },
+  'hohmann transfer':   { icon:'🚀', label:'Hohmann Transfer'   },
+  'galaxy collision':   { icon:'🌌', label:'Galaxy Collision'   },
+  'black hole':         { icon:'🕳', label:'Black Hole'        },
+  'neutron star':       { icon:'💫', label:'Neutron Star'       },
+  'pulsar':             { icon:'📡', label:'Pulsar'             },
+  'white dwarf':        { icon:'⚪', label:'White Dwarf'        },
+  'supernova remnant':  { icon:'💥', label:'Supernova'          },
+  'protoplanetary disk':{ icon:'🌀', label:'Proto. Disk'        },
+  'asteroid belt':      { icon:'🪨', label:'Asteroid Belt'      },
+  'globular cluster':   { icon:'🔮', label:'Globular Cluster'   },
+  'exoplanet system':   { icon:'🌍', label:'Exoplanet System'   },
+  'dark matter halo':   { icon:'🌑', label:'Dark Matter Halo'   },
+  'quasar':             { icon:'⚡', label:'Quasar'             },
+  'nebula':             { icon:'🌸', label:'Nebula'             },
+  'milky way core':     { icon:'🏛', label:'Milky Way Core'     },
+  'comet':              { icon:'☄',  label:'Comet'              },
+  'double planet':      { icon:'🌐', label:'Double Planet'      },
+  'roche limit':        { icon:'💔', label:'Roche Limit'        },
+  'slingshot':          { icon:'🎯', label:'Slingshot'          },
+  'kozai mechanism':    { icon:'🔄', label:'Kozai Mechanism'    },
+  'star cluster':       { icon:'✨', label:'Star Cluster'       },
+  'magnetic braking':   { icon:'🧲', label:'Magnetic Braking'   },
+  'resonance chain':    { icon:'🎵', label:'Resonance Chain'    },
+  'stellar flyby':      { icon:'💨', label:'Stellar Flyby'      }
+};
+
+function buildChips(){
+  var grid = document.getElementById('chip-grid');
+  grid.innerHTML = '';
+  var keys = Object.keys(astroData);
+  for(var i=0;i<keys.length;i++){
+    var key = keys[i];
+    var meta = CHIP_META[key] || { icon:'🌟', label: key };
+    var div = document.createElement('div');
+    div.className = 'chip';
+    div.setAttribute('data-key', key);
+    div.innerHTML = '<span class="chip-icon">'+meta.icon+'</span>'+meta.label;
+    div.addEventListener('click', (function(k){ return function(){ loadScenario(k); }; })(key));
+    grid.appendChild(div);
+  }
+}
+
+// ── LOAD SCENARIO ─────────────────────────────────────────────
+function deepCopy(arr){
+  var out = [];
+  for(var i=0;i<arr.length;i++){
+    var o=arr[i];
+    out.push({name:o.name,x:o.x,y:o.y,vx:o.vx,vy:o.vy,mass:o.mass,color:o.color,radius:o.radius,type:o.type||'star'});
+  }
+  return out;
+}
+
+function loadScenario(key){
+  var data = astroData[key];
+  if(!data){ alert('Scenario not found: '+key); return; }
+  if(simState.animId){ cancelAnimationFrame(simState.animId); simState.animId=null; }
+
+  simState.G = data.G || 0.4;
+  simState.description = data.description || '';
+  simState.objects = deepCopy(data.objects);
+  simState.originals = deepCopy(data.objects);
+  simState.tick = 0;
+  simState.currentKey = key;
+  simState.playing = true;
+
+  resizeCanvas();
+  ctx.fillStyle = '#000005';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // UI updates
+  document.getElementById('empty').style.display = 'none';
+  document.getElementById('h-scenario').textContent = (CHIP_META[key]||{label:key}).label;
+  document.getElementById('h-objects').textContent = simState.objects.length;
+  document.getElementById('ov-tr').innerHTML = key.toUpperCase()+'<br>'+simState.objects.length+' BODIES';
+  document.getElementById('scenario-title').textContent = (CHIP_META[key]||{label:key}).label.toUpperCase();
+  document.getElementById('desc-bar').textContent = simState.description;
+  document.getElementById('play-btn').textContent = 'PAUSE';
+  document.getElementById('play-btn').className = 'ctrl-btn on';
+
+  // Chips
+  var chips = document.querySelectorAll('.chip');
+  for(var i=0;i<chips.length;i++){
+    chips[i].className = chips[i].getAttribute('data-key')===key ? 'chip active' : 'chip';
+  }
+
+  // Object list
+  var list = document.getElementById('obj-list');
+  list.innerHTML = '';
+  for(var i=0;i<simState.objects.length;i++){
+    var o = simState.objects[i];
+    var item = document.createElement('div');
+    item.className = 'obj-item';
+    item.innerHTML = '<div class="obj-dot" style="background:'+o.color+'"></div>'+
+      '<span class="obj-name">'+o.name+'</span>'+
+      '<span class="obj-mass">'+o.mass+'M☉</span>';
+    list.appendChild(item);
+  }
+
+  loop();
+}
+
+// ── PHYSICS ───────────────────────────────────────────────────
+function updatePhysics(){
+  var G = simState.G;
+  var objs = simState.objects;
+  var n = objs.length;
+  var ax = new Array(n), ay = new Array(n);
+  for(var i=0;i<n;i++){ ax[i]=0; ay[i]=0; }
+
+  for(var i=0;i<n;i++){
+    for(var j=i+1;j<n;j++){
+      var dx = objs[j].x - objs[i].x;
+      var dy = objs[j].y - objs[i].y;
+      var dist2 = dx*dx + dy*dy;
+      // Adaptive softening based on mass
+      var soft = Math.max(4, Math.sqrt(objs[i].mass+objs[j].mass)*0.05);
+      dist2 += soft*soft;
+      var dist = Math.sqrt(dist2);
+      var f = G / dist2;
+      var fx = f * dx / dist;
+      var fy = f * dy / dist;
+      ax[i] += fx * objs[j].mass;
+      ay[i] += fy * objs[j].mass;
+      ax[j] -= fx * objs[i].mass;
+      ay[j] -= fy * objs[i].mass;
+    }
+  }
+
+  for(var i=0;i<n;i++){
+    objs[i].vx += ax[i] * simState.speed * 0.016;
+    objs[i].vy += ay[i] * simState.speed * 0.016;
+    objs[i].x  += objs[i].vx * simState.speed * 0.5;
+    objs[i].y  += objs[i].vy * simState.speed * 0.5;
+  }
+}
+
+// ── RENDERER ──────────────────────────────────────────────────
+function hexToRgb(hex){
+  hex = hex.replace('#','');
+  if(hex.length===3) hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+  return {
+    r:parseInt(hex.substring(0,2),16),
+    g:parseInt(hex.substring(2,4),16),
+    b:parseInt(hex.substring(4,6),16)
+  };
+}
+
+function drawFrame(){
+  var W=canvas.width, H=canvas.height;
+  var objs=simState.objects;
+
+  // Trail ghost — semi-transparent fill
+  if(simState.showTrails){
+    ctx.fillStyle='rgba(0,0,5,'+simState.trailAlpha+')';
+  } else {
+    ctx.fillStyle='#000005';
+  }
+  ctx.fillRect(0,0,W,H);
+
+  // Draw objects
+  for(var i=0;i<objs.length;i++){
+    var obj = objs[i];
+    var r = obj.radius || Math.max(2, Math.sqrt(obj.mass)*0.08);
+    var rgb = hexToRgb(obj.color);
+    var rStr = rgb.r+','+rgb.g+','+rgb.b;
+    var glowMult = TYPE_GLOW[obj.type] || 3;
+
+    if(simState.showGlow){
+      // Outer soft glow (large, very transparent)
+      var g1 = ctx.createRadialGradient(obj.x,obj.y,0,obj.x,obj.y,r*glowMult*2.5);
+      g1.addColorStop(0,'rgba('+rStr+',0.12)');
+      g1.addColorStop(1,'rgba('+rStr+',0)');
+      ctx.beginPath(); ctx.arc(obj.x,obj.y,r*glowMult*2.5,0,Math.PI*2);
+      ctx.fillStyle=g1; ctx.fill();
+
+      // Inner sharp glow
+      var g2 = ctx.createRadialGradient(obj.x,obj.y,0,obj.x,obj.y,r*glowMult);
+      g2.addColorStop(0,'rgba('+rStr+',0.55)');
+      g2.addColorStop(0.4,'rgba('+rStr+',0.2)');
+      g2.addColorStop(1,'rgba('+rStr+',0)');
+      ctx.beginPath(); ctx.arc(obj.x,obj.y,r*glowMult,0,Math.PI*2);
+      ctx.fillStyle=g2; ctx.fill();
+    }
+
+    // Core — crisp bright center
+    ctx.beginPath();
+    ctx.arc(obj.x,obj.y,r,0,Math.PI*2);
+    ctx.fillStyle=obj.color;
+    ctx.fill();
+
+    // Hard white specular highlight on larger objects
+    if(r > 5 && simState.showGlow){
+      var hx = obj.x - r*0.3;
+      var hy = obj.y - r*0.3;
+      var gr = ctx.createRadialGradient(hx,hy,0,obj.x,obj.y,r);
+      gr.addColorStop(0,'rgba(255,255,255,0.35)');
+      gr.addColorStop(0.4,'rgba(255,255,255,0.08)');
+      gr.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.beginPath(); ctx.arc(obj.x,obj.y,r,0,Math.PI*2);
+      ctx.fillStyle=gr; ctx.fill();
+    }
+
+    // Special: black hole event horizon ring
+    if(obj.type==='blackhole'){
+      ctx.beginPath(); ctx.arc(obj.x,obj.y,r*1.6,0,Math.PI*2);
+      ctx.strokeStyle='rgba('+rStr+',0.4)';
+      ctx.lineWidth=1.5; ctx.stroke();
+      ctx.beginPath(); ctx.arc(obj.x,obj.y,r*2.2,0,Math.PI*2);
+      ctx.strokeStyle='rgba('+rStr+',0.15)';
+      ctx.lineWidth=1; ctx.stroke();
+    }
+
+    // Labels
+    if(simState.showLabels && objs.length<=20){
+      ctx.font='bold 9px Space Mono, monospace';
+      ctx.fillStyle='rgba(200,215,255,0.55)';
+      ctx.fillText(obj.name, obj.x+r+4, obj.y-3);
+    }
+  }
+
+  // FPS
+  fpsCount++;
+  var now=Date.now();
+  if(now-fpsLast>=1000){
+    fps=fpsCount; fpsCount=0; fpsLast=now;
+    document.getElementById('h-fps').textContent=fps;
+  }
+  document.getElementById('h-tick').textContent=simState.tick;
+}
+
+// ── LOOP ──────────────────────────────────────────────────────
+function loop(){
+  if(simState.playing){
+    // Multiple sub-steps for accuracy
+    var substeps = simState.speed > 6 ? 3 : 2;
+    for(var s=0;s<substeps;s++) updatePhysics();
+    simState.tick++;
+  }
+  drawFrame();
+  simState.animId = requestAnimationFrame(loop);
+}
+
+// ── PROMPT MATCHING ───────────────────────────────────────────
+var KEYWORDS = {
+  'binary':'binary system','two star':'binary system','double star':'binary system',
+  'contact':'contact binary','touching':'contact binary',
+  'eccentric':'eccentric binary','elliptical orbit':'eccentric binary',
+  'solar':'solar system','planet':'solar system','sun':'solar system','earth':'solar system',
+  'three body':'three body','3 body':'three body','chaos':'three body','unstable':'three body',
+  'figure 8':'figure-8 orbit','figure-8':'figure-8 orbit','choreographic':'figure-8 orbit',
+  'lagrange':'lagrange points','trojan':'lagrange points','l4':'lagrange points','l5':'lagrange points',
+  'hohmann':'hohmann transfer','transfer orbit':'hohmann transfer','spacecraft':'hohmann transfer',
+  'galaxy collision':'galaxy collision','galactic merger':'galaxy collision','merge':'galaxy collision',
+  'black hole':'black hole','singularity':'black hole','event horizon':'black hole','bh':'black hole',
+  'neutron star':'neutron star','neutron':'neutron star',
+  'pulsar':'pulsar','rotating star':'pulsar','millisecond':'pulsar',
+  'white dwarf':'white dwarf','nova':'white dwarf','degenerate':'white dwarf',
+  'supernova':'supernova remnant','explosion':'supernova remnant','ejecta':'supernova remnant',
+  'protoplanet':'protoplanetary disk','disk':'protoplanetary disk','proto':'protoplanetary disk',
+  'asteroid':'asteroid belt','ceres':'asteroid belt','minor planet':'asteroid belt',
+  'globular':'globular cluster','omega centauri':'globular cluster','dense cluster':'globular cluster',
+  'exoplanet':'exoplanet system','hot jupiter':'exoplanet system','super earth':'exoplanet system',
+  'dark matter':'dark matter halo','halo':'dark matter halo','invisible mass':'dark matter halo',
+  'quasar':'quasar','agn':'quasar','active galactic':'quasar','supermassive':'quasar','blazar':'quasar',
+  'nebula':'nebula','stellar nursery':'nebula','molecular cloud':'nebula','orion':'nebula',
+  'milky way':'milky way core','sgr a':'milky way core','sagittarius':'milky way core','galactic center':'milky way core',
+  'comet':'comet','halley':'comet','comet orbit':'comet',
+  'double planet':'double planet','twin planet':'double planet',
+  'roche':'roche limit','tidal disruption':'roche limit','torn apart':'roche limit',
+  'slingshot':'slingshot','gravity assist':'slingshot','flyby assist':'slingshot',
+  'kozai':'kozai mechanism','lidov':'kozai mechanism','secular':'kozai mechanism',
+  'star cluster':'star cluster','open cluster':'star cluster','pleiades':'star cluster',
+  'magnetic braking':'magnetic braking','t tauri':'magnetic braking','stellar wind':'magnetic braking',
+  'resonance':'resonance chain','trappist':'resonance chain','mean motion':'resonance chain',
+  'stellar flyby':'stellar flyby','rogue star':'stellar flyby','interloper':'stellar flyby'
+};
+
+function matchPrompt(input){
+  input = input.toLowerCase().trim();
+  var keys = Object.keys(astroData);
+  for(var i=0;i<keys.length;i++) if(input.indexOf(keys[i])!==-1) return keys[i];
+  for(var kw in KEYWORDS) if(input.indexOf(kw)!==-1) return KEYWORDS[kw];
+  return null;
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+window.addEventListener('load', function(){
+  resizeCanvas();
+
+  loadData(function(){
+    buildChips();
+    console.log('Loaded', Object.keys(astroData).length, 'scenarios');
+  });
+
+  document.getElementById('go-btn').addEventListener('click', function(){
+    var input = document.getElementById('prompt-input').value.trim();
+    if(!input) return;
+    var key = matchPrompt(input);
+    if(key){ loadScenario(key); }
+    else { alert('No match found. Try: binary system, black hole, pulsar, lagrange points, hohmann transfer, resonance chain...'); }
+  });
+
+  document.getElementById('play-btn').addEventListener('click', function(){
+    simState.playing = !simState.playing;
+    this.textContent = simState.playing ? 'PAUSE' : 'PLAY ▶';
+    this.className = simState.playing ? 'ctrl-btn on' : 'ctrl-btn';
+  });
+
+  document.getElementById('reset-btn').addEventListener('click', function(){
+    if(!simState.currentKey) return;
+    simState.objects = deepCopy(simState.originals);
+    simState.tick = 0;
+    ctx.fillStyle='#000005'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  });
+
+  document.getElementById('trail-btn').addEventListener('click', function(){
+    simState.showTrails = !simState.showTrails;
+    this.className = simState.showTrails ? 'ctrl-btn on' : 'ctrl-btn';
+    this.textContent = simState.showTrails ? 'TRAILS' : 'NO TRAILS';
+  });
+
+  document.getElementById('glow-btn').addEventListener('click', function(){
+    simState.showGlow = !simState.showGlow;
+    this.className = simState.showGlow ? 'ctrl-btn on' : 'ctrl-btn';
+    this.textContent = simState.showGlow ? 'GLOW' : 'NO GLOW';
+  });
+
+  document.getElementById('label-btn').addEventListener('click', function(){
+    simState.showLabels = !simState.showLabels;
+    this.className = simState.showLabels ? 'ctrl-btn on' : 'ctrl-btn';
+    this.textContent = simState.showLabels ? 'LABELS' : 'NO LABELS';
+  });
+
+  document.getElementById('speed-slider').addEventListener('input', function(){
+    simState.speed = parseInt(this.value);
+    document.getElementById('speed-val').textContent = simState.speed+'x';
+  });
+
+  document.getElementById('trail-slider').addEventListener('input', function(){
+    var v = parseInt(this.value);
+    var labels = ['','very long','long','long','medium','medium','short','short','fast','very fast','instant'];
+    simState.trailAlpha = v * 0.025 + 0.02;
+    document.getElementById('trail-val').textContent = labels[v]||v;
+  });
+
+  window.addEventListener('resize', function(){
+    resizeCanvas();
+    if(simState.objects.length>0){ ctx.fillStyle='#000005'; ctx.fillRect(0,0,canvas.width,canvas.height); }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+{
+  "binary system": {
+    "G": 0.5, "description": "Two equal mass stars in circular orbit",
+    "objects": [
+      { "name": "Alpha", "x": 300, "y": 300, "vx": 0, "vy": 1.4, "mass": 5000, "color": "#4f7cff", "radius": 16, "type": "star" },
+      { "name": "Beta",  "x": 500, "y": 300, "vx": 0, "vy": -1.4,"mass": 5000, "color": "#ff4f9a", "radius": 16, "type": "star" }
+    ]
+  },
+  "contact binary": {
+    "G": 0.6, "description": "Two stars so close they share an outer envelope",
+    "objects": [
+      { "name": "W UMa A", "x": 360, "y": 300, "vx": 0, "vy": 2.2, "mass": 6000, "color": "#ffaa44", "radius": 20, "type": "giant" },
+      { "name": "W UMa B", "x": 440, "y": 300, "vx": 0, "vy": -2.2,"mass": 4000, "color": "#ff6622", "radius": 16, "type": "giant" }
+    ]
+  },
+  "eccentric binary": {
+    "G": 0.5, "description": "Binary stars with high orbital eccentricity",
+    "objects": [
+      { "name": "Primary",   "x": 350, "y": 300, "vx": 0,   "vy": 2.0, "mass": 8000, "color": "#ffffff", "radius": 18, "type": "star" },
+      { "name": "Secondary", "x": 600, "y": 300, "vx": 0,   "vy": -0.9,"mass": 3000, "color": "#88aaff", "radius": 11, "type": "star" }
+    ]
+  },
+  "solar system": {
+    "G": 0.45, "description": "Our solar system — Sun with 6 planets",
+    "objects": [
+      { "name": "Sun",     "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 22000, "color": "#fff200", "radius": 28, "type": "star"   },
+      { "name": "Mercury", "x": 400, "y": 210, "vx": 3.4,  "vy": 0,    "mass": 15,    "color": "#b5b5b5", "radius": 3,  "type": "planet" },
+      { "name": "Venus",   "x": 400, "y": 165, "vx": 2.8,  "vy": 0,    "mass": 80,    "color": "#e8cda0", "radius": 5,  "type": "planet" },
+      { "name": "Earth",   "x": 400, "y": 130, "vx": 2.4,  "vy": 0,    "mass": 100,   "color": "#4fffb0", "radius": 6,  "type": "planet" },
+      { "name": "Mars",    "x": 400, "y": 88,  "vx": 1.9,  "vy": 0,    "mass": 45,    "color": "#ff6b35", "radius": 4,  "type": "planet" },
+      { "name": "Jupiter", "x": 680, "y": 300, "vx": 0,    "vy": 1.2,  "mass": 1400,  "color": "#c88b3a", "radius": 17, "type": "planet" },
+      { "name": "Saturn",  "x": 130, "y": 300, "vx": 0,    "vy": -0.95,"mass": 950,   "color": "#e4d191", "radius": 14, "type": "planet" }
+    ]
+  },
+  "three body": {
+    "G": 0.4, "description": "Chaotic three-body gravitational interaction",
+    "objects": [
+      { "name": "Star A", "x": 400, "y": 185, "vx": 0.9,  "vy": 0.6,  "mass": 3000, "color": "#4f7cff", "radius": 14, "type": "star" },
+      { "name": "Star B", "x": 240, "y": 430, "vx": -1.0, "vy": 0.1,  "mass": 3000, "color": "#ff4f9a", "radius": 14, "type": "star" },
+      { "name": "Star C", "x": 560, "y": 430, "vx": 0.1,  "vy": -0.7, "mass": 3000, "color": "#4fffb0", "radius": 14, "type": "star" }
+    ]
+  },
+  "figure-8 orbit": {
+    "G": 0.35, "description": "Choreographic figure-8 three-body solution",
+    "objects": [
+      { "name": "Body A", "x": 250, "y": 300, "vx": 0.35, "vy": 0.53, "mass": 3000, "color": "#ff4f9a", "radius": 13, "type": "star" },
+      { "name": "Body B", "x": 550, "y": 300, "vx": 0.35, "vy": 0.53, "mass": 3000, "color": "#4fffb0", "radius": 13, "type": "star" },
+      { "name": "Body C", "x": 400, "y": 300, "vx": -0.7, "vy": -1.06,"mass": 3000, "color": "#4f7cff", "radius": 13, "type": "star" }
+    ]
+  },
+  "lagrange points": {
+    "G": 0.4, "description": "Trojan asteroids at L4/L5 Lagrange points",
+    "objects": [
+      { "name": "Star",      "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 15000, "color": "#fff200", "radius": 22, "type": "star"    },
+      { "name": "Planet",    "x": 400, "y": 150, "vx": 2.5,  "vy": 0,    "mass": 300,   "color": "#4f7cff", "radius": 8,  "type": "planet"  },
+      { "name": "L4 Trojan", "x": 267, "y": 225, "vx": 2.2,  "vy": -1.3, "mass": 5,     "color": "#4fffb0", "radius": 3,  "type": "asteroid"},
+      { "name": "L5 Trojan", "x": 533, "y": 225, "vx": 2.2,  "vy": 1.3,  "mass": 5,     "color": "#4fffb0", "radius": 3,  "type": "asteroid"},
+      { "name": "L4 Ast-2",  "x": 255, "y": 235, "vx": 2.1,  "vy": -1.4, "mass": 3,     "color": "#88ffcc", "radius": 2,  "type": "asteroid"},
+      { "name": "L5 Ast-2",  "x": 545, "y": 215, "vx": 2.3,  "vy": 1.2,  "mass": 3,     "color": "#88ffcc", "radius": 2,  "type": "asteroid"}
+    ]
+  },
+  "hohmann transfer": {
+    "G": 0.4, "description": "Spacecraft transferring between two orbits",
+    "objects": [
+      { "name": "Sun",        "x": 400, "y": 300, "vx": 0,    "vy": 0,   "mass": 18000, "color": "#fff200", "radius": 24, "type": "star"      },
+      { "name": "Inner Orbit","x": 400, "y": 180, "vx": 2.8,  "vy": 0,   "mass": 100,   "color": "#4fffb0", "radius": 6,  "type": "planet"    },
+      { "name": "Spacecraft", "x": 400, "y": 165, "vx": 3.4,  "vy": 0,   "mass": 2,     "color": "#ffffff", "radius": 3,  "type": "spacecraft"},
+      { "name": "Outer Orbit","x": 650, "y": 300, "vx": 0,    "vy": 1.3, "mass": 200,   "color": "#ff6b35", "radius": 8,  "type": "planet"    }
+    ]
+  },
+  "galaxy collision": {
+    "G": 0.3, "description": "Two spiral galaxies merging",
+    "objects": [
+      { "name": "G1-Core", "x": 200, "y": 300, "vx": 0.65, "vy": 0,    "mass": 9000, "color": "#4f7cff", "radius": 20, "type": "galaxy" },
+      { "name": "G1-S1",   "x": 148, "y": 248, "vx": 0.65, "vy": -0.6, "mass": 120,  "color": "#88aaff", "radius": 4,  "type": "star"   },
+      { "name": "G1-S2",   "x": 252, "y": 248, "vx": 0.65, "vy": 0.6,  "mass": 120,  "color": "#88aaff", "radius": 4,  "type": "star"   },
+      { "name": "G1-S3",   "x": 148, "y": 352, "vx": 0.65, "vy": -0.4, "mass": 120,  "color": "#aaccff", "radius": 3,  "type": "star"   },
+      { "name": "G1-S4",   "x": 252, "y": 352, "vx": 0.65, "vy": 0.4,  "mass": 120,  "color": "#aaccff", "radius": 3,  "type": "star"   },
+      { "name": "G1-S5",   "x": 118, "y": 300, "vx": 0.65, "vy": 0.7,  "mass": 90,   "color": "#ccddff", "radius": 3,  "type": "star"   },
+      { "name": "G1-S6",   "x": 282, "y": 300, "vx": 0.65, "vy": -0.7, "mass": 90,   "color": "#ccddff", "radius": 3,  "type": "star"   },
+      { "name": "G2-Core", "x": 620, "y": 300, "vx": -0.65,"vy": 0,    "mass": 9000, "color": "#ff4f9a", "radius": 20, "type": "galaxy" },
+      { "name": "G2-S1",   "x": 568, "y": 248, "vx": -0.65,"vy": -0.6, "mass": 120,  "color": "#ff88bb", "radius": 4,  "type": "star"   },
+      { "name": "G2-S2",   "x": 672, "y": 248, "vx": -0.65,"vy": 0.6,  "mass": 120,  "color": "#ff88bb", "radius": 4,  "type": "star"   },
+      { "name": "G2-S3",   "x": 568, "y": 352, "vx": -0.65,"vy": -0.4, "mass": 120,  "color": "#ffaad0", "radius": 3,  "type": "star"   },
+      { "name": "G2-S4",   "x": 672, "y": 352, "vx": -0.65,"vy": 0.4,  "mass": 120,  "color": "#ffaad0", "radius": 3,  "type": "star"   },
+      { "name": "G2-S5",   "x": 702, "y": 300, "vx": -0.65,"vy": 0.7,  "mass": 90,   "color": "#ffccdd", "radius": 3,  "type": "star"   },
+      { "name": "G2-S6",   "x": 538, "y": 300, "vx": -0.65,"vy": -0.7, "mass": 90,   "color": "#ffccdd", "radius": 3,  "type": "star"   }
+    ]
+  },
+  "black hole": {
+    "G": 0.55, "description": "Stellar black hole with accretion disk",
+    "objects": [
+      { "name": "Black Hole",  "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 85000, "color": "#9933ff", "radius": 14, "type": "blackhole"  },
+      { "name": "Acc-Ring-1",  "x": 400, "y": 188, "vx": 4.8,  "vy": 0,    "mass": 20,    "color": "#ff9900", "radius": 3,  "type": "accretion"  },
+      { "name": "Acc-Ring-2",  "x": 484, "y": 216, "vx": 3.4,  "vy": 3.4,  "mass": 20,    "color": "#ffcc00", "radius": 3,  "type": "accretion"  },
+      { "name": "Acc-Ring-3",  "x": 512, "y": 300, "vx": 0,    "vy": 4.8,  "mass": 20,    "color": "#ff9900", "radius": 3,  "type": "accretion"  },
+      { "name": "Acc-Ring-4",  "x": 484, "y": 384, "vx": -3.4, "vy": 3.4,  "mass": 20,    "color": "#ffcc00", "radius": 3,  "type": "accretion"  },
+      { "name": "Acc-Ring-5",  "x": 400, "y": 412, "vx": -4.8, "vy": 0,    "mass": 20,    "color": "#ff9900", "radius": 3,  "type": "accretion"  },
+      { "name": "Acc-Ring-6",  "x": 316, "y": 384, "vx": -3.4, "vy": -3.4, "mass": 20,    "color": "#ffcc00", "radius": 3,  "type": "accretion"  },
+      { "name": "Acc-Ring-7",  "x": 288, "y": 300, "vx": 0,    "vy": -4.8, "mass": 20,    "color": "#ff9900", "radius": 3,  "type": "accretion"  },
+      { "name": "Acc-Ring-8",  "x": 316, "y": 216, "vx": 3.4,  "vy": -3.4, "mass": 20,    "color": "#ffcc00", "radius": 3,  "type": "accretion"  },
+      { "name": "Star A",      "x": 400, "y": 90,  "vx": 3.5,  "vy": 0,    "mass": 600,   "color": "#ffffff", "radius": 8,  "type": "star"       },
+      { "name": "Star B",      "x": 680, "y": 300, "vx": 0,    "vy": 3.0,  "mass": 400,   "color": "#aaddff", "radius": 6,  "type": "star"       }
+    ]
+  },
+  "neutron star": {
+    "G": 0.55, "description": "Neutron star with companion and accretion stream",
+    "objects": [
+      { "name": "Neutron Star", "x": 400, "y": 300, "vx": 0,   "vy": 0,    "mass": 52000, "color": "#00ffff", "radius": 7,  "type": "neutron"  },
+      { "name": "Companion",    "x": 400, "y": 140, "vx": 4.0, "vy": 0,    "mass": 600,   "color": "#ff8844", "radius": 11, "type": "star"     },
+      { "name": "Debris-N",     "x": 400, "y": 240, "vx": 0,   "vy": -3.0, "mass": 8,     "color": "#aaffff", "radius": 2,  "type": "debris"   },
+      { "name": "Debris-S",     "x": 400, "y": 360, "vx": 0,   "vy": 3.0,  "mass": 8,     "color": "#aaffff", "radius": 2,  "type": "debris"   },
+      { "name": "Debris-E",     "x": 480, "y": 300, "vx": 3.0, "vy": 0,    "mass": 8,     "color": "#88ffff", "radius": 2,  "type": "debris"   },
+      { "name": "Debris-W",     "x": 320, "y": 300, "vx": -3.0,"vy": 0,    "mass": 8,     "color": "#88ffff", "radius": 2,  "type": "debris"   }
+    ]
+  },
+  "pulsar": {
+    "G": 0.5, "description": "Rapidly rotating pulsar with relativistic jets",
+    "objects": [
+      { "name": "Pulsar",    "x": 400, "y": 300, "vx": 0,   "vy": 0,    "mass": 48000, "color": "#00ffff", "radius": 6,  "type": "neutron" },
+      { "name": "Jet-N1",   "x": 400, "y": 265, "vx": 0.1, "vy": -3.2, "mass": 3,     "color": "#88ffff", "radius": 2,  "type": "jet"     },
+      { "name": "Jet-N2",   "x": 400, "y": 245, "vx": -0.1,"vy": -3.6, "mass": 3,     "color": "#aaffff", "radius": 2,  "type": "jet"     },
+      { "name": "Jet-S1",   "x": 400, "y": 335, "vx": -0.1,"vy": 3.2,  "mass": 3,     "color": "#88ffff", "radius": 2,  "type": "jet"     },
+      { "name": "Jet-S2",   "x": 400, "y": 355, "vx": 0.1, "vy": 3.6,  "mass": 3,     "color": "#aaffff", "radius": 2,  "type": "jet"     },
+      { "name": "Companion", "x": 400, "y": 140, "vx": 3.5, "vy": 0,    "mass": 700,   "color": "#ff8844", "radius": 10, "type": "star"    },
+      { "name": "Gas Ring1", "x": 330, "y": 300, "vx": 0,   "vy": -1.6, "mass": 15,    "color": "#66aaff", "radius": 2,  "type": "gas"     },
+      { "name": "Gas Ring2", "x": 470, "y": 300, "vx": 0,   "vy": 1.6,  "mass": 15,    "color": "#66aaff", "radius": 2,  "type": "gas"     },
+      { "name": "Gas Ring3", "x": 400, "y": 230, "vx": 1.6, "vy": 0,    "mass": 15,    "color": "#66aaff", "radius": 2,  "type": "gas"     },
+      { "name": "Gas Ring4", "x": 400, "y": 370, "vx": -1.6,"vy": 0,    "mass": 15,    "color": "#66aaff", "radius": 2,  "type": "gas"     }
+    ]
+  },
+  "white dwarf": {
+    "G": 0.5, "description": "White dwarf accreting from red giant companion",
+    "objects": [
+      { "name": "White Dwarf", "x": 400, "y": 300, "vx": 0,   "vy": 0,   "mass": 32000, "color": "#eeeeff", "radius": 7,  "type": "dwarf"  },
+      { "name": "Red Giant",   "x": 400, "y": 120, "vx": 2.6, "vy": 0,   "mass": 2200,  "color": "#ff4400", "radius": 22, "type": "giant"  },
+      { "name": "Gas-1",       "x": 400, "y": 195, "vx": 1.9, "vy": 0.6, "mass": 8,     "color": "#ff8866", "radius": 2,  "type": "gas"    },
+      { "name": "Gas-2",       "x": 418, "y": 208, "vx": 1.6, "vy": 0.9, "mass": 8,     "color": "#ff9977", "radius": 2,  "type": "gas"    },
+      { "name": "Gas-3",       "x": 436, "y": 224, "vx": 1.3, "vy": 1.2, "mass": 8,     "color": "#ffaa88", "radius": 2,  "type": "gas"    },
+      { "name": "Gas-4",       "x": 450, "y": 244, "vx": 1.0, "vy": 1.4, "mass": 8,     "color": "#ffbb99", "radius": 2,  "type": "gas"    }
+    ]
+  },
+  "supernova remnant": {
+    "G": 0.2, "description": "Expanding shockwave from stellar explosion",
+    "objects": [
+      { "name": "Pulsar",   "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 42000, "color": "#00ffff", "radius": 6,  "type": "neutron" },
+      { "name": "Shell-N",  "x": 400, "y": 148, "vx": 0,    "vy": -2.2, "mass": 45,    "color": "#ff4400", "radius": 5,  "type": "debris"  },
+      { "name": "Shell-S",  "x": 400, "y": 452, "vx": 0,    "vy": 2.2,  "mass": 45,    "color": "#ff4400", "radius": 5,  "type": "debris"  },
+      { "name": "Shell-E",  "x": 596, "y": 300, "vx": 2.2,  "vy": 0,    "mass": 45,    "color": "#ff6600", "radius": 5,  "type": "debris"  },
+      { "name": "Shell-W",  "x": 204, "y": 300, "vx": -2.2, "vy": 0,    "mass": 45,    "color": "#ff6600", "radius": 5,  "type": "debris"  },
+      { "name": "Shell-NE", "x": 535, "y": 165, "vx": 1.6,  "vy": -1.6, "mass": 38,    "color": "#ffaa00", "radius": 4,  "type": "debris"  },
+      { "name": "Shell-NW", "x": 265, "y": 165, "vx": -1.6, "vy": -1.6, "mass": 38,    "color": "#ffaa00", "radius": 4,  "type": "debris"  },
+      { "name": "Shell-SE", "x": 535, "y": 435, "vx": 1.6,  "vy": 1.6,  "mass": 38,    "color": "#ffaa00", "radius": 4,  "type": "debris"  },
+      { "name": "Shell-SW", "x": 265, "y": 435, "vx": -1.6, "vy": 1.6,  "mass": 38,    "color": "#ffaa00", "radius": 4,  "type": "debris"  },
+      { "name": "Ejecta-1", "x": 400, "y": 220, "vx": 0.4,  "vy": -1.5, "mass": 18,    "color": "#ff2200", "radius": 3,  "type": "debris"  },
+      { "name": "Ejecta-2", "x": 470, "y": 370, "vx": 1.3,  "vy": 0.5,  "mass": 18,    "color": "#ff2200", "radius": 3,  "type": "debris"  },
+      { "name": "Ejecta-3", "x": 330, "y": 370, "vx": -1.3, "vy": 0.5,  "mass": 18,    "color": "#ff2200", "radius": 3,  "type": "debris"  }
+    ]
+  },
+  "protoplanetary disk": {
+    "G": 0.42, "description": "Young star with forming planetary system",
+    "objects": [
+      { "name": "Protostar",    "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 13000, "color": "#ffdd44", "radius": 20, "type": "star"    },
+      { "name": "Disk-In-1",   "x": 400, "y": 226, "vx": 2.9,  "vy": 0,    "mass": 60,    "color": "#cc6600", "radius": 3,  "type": "gas"     },
+      { "name": "Disk-In-2",   "x": 474, "y": 300, "vx": 0,    "vy": 2.9,  "mass": 60,    "color": "#cc6600", "radius": 3,  "type": "gas"     },
+      { "name": "Disk-In-3",   "x": 400, "y": 374, "vx": -2.9, "vy": 0,    "mass": 60,    "color": "#cc6600", "radius": 3,  "type": "gas"     },
+      { "name": "Disk-In-4",   "x": 326, "y": 300, "vx": 0,    "vy": -2.9, "mass": 60,    "color": "#cc6600", "radius": 3,  "type": "gas"     },
+      { "name": "Disk-Mid-1",  "x": 400, "y": 188, "vx": 2.3,  "vy": 0,    "mass": 80,    "color": "#ff8844", "radius": 4,  "type": "gas"     },
+      { "name": "Disk-Mid-2",  "x": 512, "y": 300, "vx": 0,    "vy": 2.3,  "mass": 80,    "color": "#ff8844", "radius": 4,  "type": "gas"     },
+      { "name": "Disk-Mid-3",  "x": 400, "y": 412, "vx": -2.3, "vy": 0,    "mass": 80,    "color": "#ff8844", "radius": 4,  "type": "gas"     },
+      { "name": "Disk-Mid-4",  "x": 288, "y": 300, "vx": 0,    "vy": -2.3, "mass": 80,    "color": "#ff8844", "radius": 4,  "type": "gas"     },
+      { "name": "Planetesimal","x": 400, "y": 148, "vx": 1.9,  "vy": 0,    "mass": 220,   "color": "#4fffb0", "radius": 6,  "type": "planet"  },
+      { "name": "Planetesml-2","x": 552, "y": 300, "vx": 0,    "vy": 1.9,  "mass": 180,   "color": "#4f7cff", "radius": 5,  "type": "planet"  }
+    ]
+  },
+  "asteroid belt": {
+    "G": 0.4, "description": "Sun with Jupiter and a full asteroid belt",
+    "objects": [
+      { "name": "Sun",     "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 19000, "color": "#fff200", "radius": 26, "type": "star"    },
+      { "name": "Jupiter", "x": 700, "y": 300, "vx": 0,    "vy": 1.05, "mass": 1300,  "color": "#c88b3a", "radius": 16, "type": "planet"  },
+      { "name": "Ceres",   "x": 400, "y": 152, "vx": 2.6,  "vy": 0,    "mass": 90,    "color": "#ccbbaa", "radius": 5,  "type": "dwarf"   },
+      { "name": "Vesta",   "x": 400, "y": 163, "vx": 2.5,  "vy": 0,    "mass": 40,    "color": "#aaaaaa", "radius": 4,  "type": "asteroid"},
+      { "name": "AST-1",   "x": 520, "y": 215, "vx": 1.9,  "vy": 1.7,  "mass": 12,    "color": "#888888", "radius": 3,  "type": "asteroid"},
+      { "name": "AST-2",   "x": 560, "y": 300, "vx": 0,    "vy": 2.4,  "mass": 14,    "color": "#999999", "radius": 3,  "type": "asteroid"},
+      { "name": "AST-3",   "x": 520, "y": 385, "vx": -1.9, "vy": 1.7,  "mass": 12,    "color": "#aaaaaa", "radius": 3,  "type": "asteroid"},
+      { "name": "AST-4",   "x": 400, "y": 438, "vx": -2.5, "vy": 0,    "mass": 14,    "color": "#888888", "radius": 3,  "type": "asteroid"},
+      { "name": "AST-5",   "x": 280, "y": 385, "vx": -1.9, "vy": -1.7, "mass": 12,    "color": "#999999", "radius": 3,  "type": "asteroid"},
+      { "name": "AST-6",   "x": 240, "y": 300, "vx": 0,    "vy": -2.4, "mass": 14,    "color": "#aaaaaa", "radius": 3,  "type": "asteroid"},
+      { "name": "AST-7",   "x": 280, "y": 215, "vx": 1.9,  "vy": -1.7, "mass": 12,    "color": "#888888", "radius": 3,  "type": "asteroid"}
+    ]
+  },
+  "globular cluster": {
+    "G": 0.3, "description": "Dense ancient star cluster with 13 bodies",
+    "objects": [
+      { "name": "Core",   "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 26000, "color": "#ffffff", "radius": 18, "type": "star" },
+      { "name": "GC-1",  "x": 312, "y": 232, "vx": 0.7,  "vy": -1.0, "mass": 320,   "color": "#ffe8aa", "radius": 5,  "type": "star" },
+      { "name": "GC-2",  "x": 488, "y": 232, "vx": -0.7, "vy": -1.0, "mass": 320,   "color": "#ffd688", "radius": 5,  "type": "star" },
+      { "name": "GC-3",  "x": 488, "y": 368, "vx": -0.7, "vy": 1.0,  "mass": 320,   "color": "#ffcc66", "radius": 5,  "type": "star" },
+      { "name": "GC-4",  "x": 312, "y": 368, "vx": 0.7,  "vy": 1.0,  "mass": 320,   "color": "#ffe8aa", "radius": 5,  "type": "star" },
+      { "name": "GC-5",  "x": 248, "y": 300, "vx": 0,    "vy": -1.2, "mass": 260,   "color": "#ffddaa", "radius": 4,  "type": "star" },
+      { "name": "GC-6",  "x": 552, "y": 300, "vx": 0,    "vy": 1.2,  "mass": 260,   "color": "#ffddaa", "radius": 4,  "type": "star" },
+      { "name": "GC-7",  "x": 400, "y": 178, "vx": 1.2,  "vy": 0,    "mass": 260,   "color": "#ffd699", "radius": 4,  "type": "star" },
+      { "name": "GC-8",  "x": 400, "y": 422, "vx": -1.2, "vy": 0,    "mass": 260,   "color": "#ffd699", "radius": 4,  "type": "star" },
+      { "name": "GC-9",  "x": 200, "y": 220, "vx": 0.8,  "vy": -0.8, "mass": 190,   "color": "#ffcc88", "radius": 3,  "type": "star" },
+      { "name": "GC-10", "x": 600, "y": 220, "vx": -0.8, "vy": -0.8, "mass": 190,   "color": "#ffcc88", "radius": 3,  "type": "star" },
+      { "name": "GC-11", "x": 600, "y": 380, "vx": -0.8, "vy": 0.8,  "mass": 190,   "color": "#ffcc88", "radius": 3,  "type": "star" },
+      { "name": "GC-12", "x": 200, "y": 380, "vx": 0.8,  "vy": 0.8,  "mass": 190,   "color": "#ffcc88", "radius": 3,  "type": "star" }
+    ]
+  },
+  "exoplanet system": {
+    "G": 0.42, "description": "Alien star system with Hot Jupiter and Super Earth",
+    "objects": [
+      { "name": "Host Star",  "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 16000, "color": "#ffee88", "radius": 22, "type": "star"   },
+      { "name": "Hot Jupiter","x": 400, "y": 218, "vx": 3.6,  "vy": 0,    "mass": 850,   "color": "#ff6633", "radius": 12, "type": "planet" },
+      { "name": "Super Earth","x": 400, "y": 162, "vx": 2.9,  "vy": 0,    "mass": 220,   "color": "#44aaff", "radius": 7,  "type": "planet" },
+      { "name": "Ice Giant",  "x": 610, "y": 300, "vx": 0,    "vy": 1.45, "mass": 520,   "color": "#88ccff", "radius": 9,  "type": "planet" },
+      { "name": "Moon",       "x": 400, "y": 210, "vx": 4.4,  "vy": 0,    "mass": 18,    "color": "#aaaaaa", "radius": 2,  "type": "moon"   }
+    ]
+  },
+  "dark matter halo": {
+    "G": 0.25, "description": "Invisible dark matter shaping galactic structure",
+    "objects": [
+      { "name": "Galactic Core","x": 400,"y": 300,"vx": 0,    "vy": 0,    "mass": 55000, "color": "#ffffff", "radius": 15, "type": "galaxy"  },
+      { "name": "DM-Node1",    "x": 195,"y": 300,"vx": 0,    "vy": -0.7, "mass": 5500,  "color": "#440088", "radius": 10, "type": "darkmatter"},
+      { "name": "DM-Node2",    "x": 605,"y": 300,"vx": 0,    "vy": 0.7,  "mass": 5500,  "color": "#440088", "radius": 10, "type": "darkmatter"},
+      { "name": "DM-Node3",    "x": 400,"y": 95, "vx": 0.7,  "vy": 0,    "mass": 5500,  "color": "#440088", "radius": 10, "type": "darkmatter"},
+      { "name": "DM-Node4",    "x": 400,"y": 505,"vx": -0.7, "vy": 0,    "mass": 5500,  "color": "#440088", "radius": 10, "type": "darkmatter"},
+      { "name": "Star-1",      "x": 305,"y": 240,"vx": 0.9,  "vy": -0.9, "mass": 210,   "color": "#aaaaff", "radius": 4,  "type": "star"    },
+      { "name": "Star-2",      "x": 495,"y": 240,"vx": -0.9, "vy": -0.9, "mass": 210,   "color": "#aaaaff", "radius": 4,  "type": "star"    },
+      { "name": "Star-3",      "x": 495,"y": 360,"vx": -0.9, "vy": 0.9,  "mass": 210,   "color": "#aaaaff", "radius": 4,  "type": "star"    },
+      { "name": "Star-4",      "x": 305,"y": 360,"vx": 0.9,  "vy": 0.9,  "mass": 210,   "color": "#aaaaff", "radius": 4,  "type": "star"    }
+    ]
+  },
+  "quasar": {
+    "G": 0.45, "description": "Supermassive black hole powering a quasar",
+    "objects": [
+      { "name": "SMBH",      "x": 400,"y": 300,"vx": 0,    "vy": 0,    "mass": 200000,"color": "#cc00ff", "radius": 18, "type": "blackhole" },
+      { "name": "Acc-1",     "x": 400,"y": 196,"vx": 5.2,  "vy": 0,    "mass": 45,    "color": "#ffaa00", "radius": 3,  "type": "accretion" },
+      { "name": "Acc-2",     "x": 504,"y": 300,"vx": 0,    "vy": 5.2,  "mass": 45,    "color": "#ff8800", "radius": 3,  "type": "accretion" },
+      { "name": "Acc-3",     "x": 400,"y": 404,"vx": -5.2, "vy": 0,    "mass": 45,    "color": "#ffaa00", "radius": 3,  "type": "accretion" },
+      { "name": "Acc-4",     "x": 296,"y": 300,"vx": 0,    "vy": -5.2, "mass": 45,    "color": "#ff8800", "radius": 3,  "type": "accretion" },
+      { "name": "Jet-N",     "x": 400,"y": 148,"vx": 0,    "vy": -2.2, "mass": 8,     "color": "#ffffff", "radius": 2,  "type": "jet"       },
+      { "name": "Jet-S",     "x": 400,"y": 452,"vx": 0,    "vy": 2.2,  "mass": 8,     "color": "#ffffff", "radius": 2,  "type": "jet"       },
+      { "name": "Host-S1",   "x": 200,"y": 200,"vx": 0.45, "vy": -0.45,"mass": 320,   "color": "#aaaaff", "radius": 5,  "type": "star"      },
+      { "name": "Host-S2",   "x": 600,"y": 400,"vx": -0.45,"vy": 0.45, "mass": 320,   "color": "#aaaaff", "radius": 5,  "type": "star"      }
+    ]
+  },
+  "nebula": {
+    "G": 0.2, "description": "Stellar nursery with gas clouds and forming stars",
+    "objects": [
+      { "name": "OB Star A", "x": 360, "y": 285, "vx": 0.25,  "vy": -0.12,"mass": 3200, "color": "#aaddff", "radius": 13, "type": "star" },
+      { "name": "OB Star B", "x": 440, "y": 315, "vx": -0.25, "vy": 0.12, "mass": 2600, "color": "#bbddff", "radius": 11, "type": "star" },
+      { "name": "Gas-1",     "x": 275, "y": 198, "vx": 0.12,  "vy": 0.35, "mass": 220,  "color": "#ff44aa", "radius": 9,  "type": "gas"  },
+      { "name": "Gas-2",     "x": 525, "y": 198, "vx": -0.12, "vy": 0.35, "mass": 220,  "color": "#aa44ff", "radius": 9,  "type": "gas"  },
+      { "name": "Gas-3",     "x": 275, "y": 402, "vx": 0.12,  "vy": -0.35,"mass": 220,  "color": "#ff44aa", "radius": 9,  "type": "gas"  },
+      { "name": "Gas-4",     "x": 525, "y": 402, "vx": -0.12, "vy": -0.35,"mass": 220,  "color": "#aa44ff", "radius": 9,  "type": "gas"  },
+      { "name": "Dust-1",    "x": 195, "y": 300, "vx": 0.35,  "vy": 0.12, "mass": 85,   "color": "#886644", "radius": 6,  "type": "gas"  },
+      { "name": "Dust-2",    "x": 605, "y": 300, "vx": -0.35, "vy": -0.12,"mass": 85,   "color": "#886644", "radius": 6,  "type": "gas"  },
+      { "name": "Dust-3",    "x": 400, "y": 148, "vx": 0.12,  "vy": 0.35, "mass": 85,   "color": "#886644", "radius": 6,  "type": "gas"  },
+      { "name": "Dust-4",    "x": 400, "y": 452, "vx": -0.12, "vy": -0.35,"mass": 85,   "color": "#886644", "radius": 6,  "type": "gas"  },
+      { "name": "Protostar", "x": 400, "y": 300, "vx": 0,     "vy": 0,    "mass": 1100, "color": "#ffdd44", "radius": 8,  "type": "star" }
+    ]
+  },
+  "milky way core": {
+    "G": 0.5, "description": "Galactic center — Sagittarius A* with S-stars",
+    "objects": [
+      { "name": "Sgr A*",  "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 160000,"color": "#ff00ff", "radius": 14, "type": "blackhole" },
+      { "name": "S2",      "x": 400, "y": 228, "vx": 4.2,  "vy": 0,    "mass": 290,   "color": "#ffffff", "radius": 5,  "type": "star"      },
+      { "name": "S14",     "x": 462, "y": 300, "vx": 0,    "vy": 3.7,  "mass": 240,   "color": "#ffeecc", "radius": 4,  "type": "star"      },
+      { "name": "S38",     "x": 338, "y": 300, "vx": 0,    "vy": -3.7, "mass": 200,   "color": "#ffeebb", "radius": 4,  "type": "star"      },
+      { "name": "Star-A",  "x": 300, "y": 228, "vx": 0.9,  "vy": -1.3, "mass": 420,   "color": "#ffddaa", "radius": 5,  "type": "star"      },
+      { "name": "Star-B",  "x": 500, "y": 228, "vx": -0.9, "vy": -1.3, "mass": 420,   "color": "#ffccaa", "radius": 5,  "type": "star"      },
+      { "name": "Star-C",  "x": 500, "y": 372, "vx": -0.9, "vy": 1.3,  "mass": 420,   "color": "#ffddaa", "radius": 5,  "type": "star"      },
+      { "name": "Star-D",  "x": 300, "y": 372, "vx": 0.9,  "vy": 1.3,  "mass": 420,   "color": "#ffccaa", "radius": 5,  "type": "star"      },
+      { "name": "Gas Ring","x": 562, "y": 300, "vx": 0,    "vy": 2.1,  "mass": 110,   "color": "#ff6644", "radius": 3,  "type": "gas"       }
+    ]
+  },
+  "comet": {
+    "G": 0.4, "description": "Highly eccentric comet orbit around the Sun",
+    "objects": [
+      { "name": "Sun",     "x": 400, "y": 300, "vx": 0,   "vy": 0,   "mass": 20000, "color": "#fff200", "radius": 26, "type": "star"   },
+      { "name": "Comet",   "x": 400, "y": 148, "vx": 4.8, "vy": 0,   "mass": 5,     "color": "#aaffff", "radius": 3,  "type": "comet"  },
+      { "name": "Jupiter", "x": 680, "y": 300, "vx": 0,   "vy": 1.1, "mass": 1300,  "color": "#c88b3a", "radius": 16, "type": "planet" },
+      { "name": "Earth",   "x": 400, "y": 200, "vx": 2.4, "vy": 0,   "mass": 100,   "color": "#4fffb0", "radius": 6,  "type": "planet" }
+    ]
+  },
+  "double planet": {
+    "G": 0.45, "description": "Two planets of similar mass orbiting each other and the Sun",
+    "objects": [
+      { "name": "Sun",       "x": 400, "y": 300, "vx": 0,   "vy": 0,   "mass": 18000, "color": "#fff200", "radius": 24, "type": "star"   },
+      { "name": "Planet A",  "x": 380, "y": 160, "vx": 2.3, "vy": 0.5, "mass": 400,   "color": "#4f7cff", "radius": 8,  "type": "planet" },
+      { "name": "Planet B",  "x": 420, "y": 160, "vx": 2.3, "vy": -0.5,"mass": 380,   "color": "#4fffb0", "radius": 8,  "type": "planet" }
+    ]
+  },
+  "roche limit": {
+    "G": 0.5, "description": "Moon being torn apart crossing the Roche limit",
+    "objects": [
+      { "name": "Planet",    "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 28000, "color": "#4f7cff", "radius": 20, "type": "planet" },
+      { "name": "Moon-Core", "x": 400, "y": 160, "vx": 3.5,  "vy": 0,    "mass": 300,   "color": "#aaaaaa", "radius": 8,  "type": "moon"   },
+      { "name": "Frag-1",    "x": 390, "y": 148, "vx": 3.7,  "vy": -0.3, "mass": 30,    "color": "#888888", "radius": 3,  "type": "debris" },
+      { "name": "Frag-2",    "x": 410, "y": 148, "vx": 3.3,  "vy": 0.3,  "mass": 30,    "color": "#888888", "radius": 3,  "type": "debris" },
+      { "name": "Frag-3",    "x": 385, "y": 155, "vx": 3.8,  "vy": -0.5, "mass": 20,    "color": "#666666", "radius": 2,  "type": "debris" },
+      { "name": "Frag-4",    "x": 415, "y": 155, "vx": 3.2,  "vy": 0.5,  "mass": 20,    "color": "#666666", "radius": 2,  "type": "debris" }
+    ]
+  },
+  "slingshot": {
+    "G": 0.45, "description": "Gravitational slingshot — spacecraft using planet gravity",
+    "objects": [
+      { "name": "Sun",        "x": 400, "y": 300, "vx": 0,   "vy": 0,   "mass": 19000, "color": "#fff200", "radius": 25, "type": "star"       },
+      { "name": "Jupiter",    "x": 680, "y": 300, "vx": 0,   "vy": 1.1, "mass": 1300,  "color": "#c88b3a", "radius": 16, "type": "planet"     },
+      { "name": "Spacecraft", "x": 400, "y": 450, "vx": 2.8, "vy": 0,   "mass": 1,     "color": "#ffffff", "radius": 2,  "type": "spacecraft" },
+      { "name": "Earth",      "x": 400, "y": 180, "vx": 2.4, "vy": 0,   "mass": 100,   "color": "#4fffb0", "radius": 6,  "type": "planet"     }
+    ]
+  },
+  "kozai mechanism": {
+    "G": 0.4, "description": "Kozai-Lidov: outer binary drives inner orbit eccentricity",
+    "objects": [
+      { "name": "Primary",   "x": 400, "y": 300, "vx": 0,   "vy": 0,   "mass": 12000, "color": "#fff200", "radius": 20, "type": "star"   },
+      { "name": "Inner",     "x": 400, "y": 200, "vx": 3.0, "vy": 0,   "mass": 200,   "color": "#4fffb0", "radius": 6,  "type": "planet" },
+      { "name": "Outer",     "x": 620, "y": 300, "vx": 0,   "vy": 1.5, "mass": 2000,  "color": "#ff4f9a", "radius": 14, "type": "star"   }
+    ]
+  },
+  "star cluster": {
+    "G": 0.3, "description": "Open star cluster with central concentration",
+    "objects": [
+      { "name": "Core",   "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 16000, "color": "#fff200", "radius": 22, "type": "star" },
+      { "name": "Star-1", "x": 302, "y": 202, "vx": 0.85, "vy": -0.85,"mass": 210,   "color": "#4f7cff", "radius": 5,  "type": "star" },
+      { "name": "Star-2", "x": 498, "y": 202, "vx": -0.85,"vy": -0.85,"mass": 210,   "color": "#ff4f9a", "radius": 5,  "type": "star" },
+      { "name": "Star-3", "x": 302, "y": 398, "vx": 0.85, "vy": 0.85, "mass": 210,   "color": "#4fffb0", "radius": 5,  "type": "star" },
+      { "name": "Star-4", "x": 498, "y": 398, "vx": -0.85,"vy": 0.85, "mass": 210,   "color": "#ffaa44", "radius": 5,  "type": "star" },
+      { "name": "Star-5", "x": 200, "y": 300, "vx": 0,    "vy": 1.15, "mass": 160,   "color": "#cc88ff", "radius": 4,  "type": "star" },
+      { "name": "Star-6", "x": 600, "y": 300, "vx": 0,    "vy": -1.15,"mass": 160,   "color": "#ff6666", "radius": 4,  "type": "star" },
+      { "name": "Star-7", "x": 400, "y": 148, "vx": 1.15, "vy": 0,    "mass": 160,   "color": "#66ffcc", "radius": 4,  "type": "star" },
+      { "name": "Star-8", "x": 400, "y": 452, "vx": -1.15,"vy": 0,    "mass": 160,   "color": "#ffcc66", "radius": 4,  "type": "star" }
+    ]
+  },
+  "magnetic braking": {
+    "G": 0.4, "description": "T Tauri star losing angular momentum via magnetic wind",
+    "objects": [
+      { "name": "T Tauri",  "x": 400, "y": 300, "vx": 0,    "vy": 0,    "mass": 10000, "color": "#ff8844", "radius": 18, "type": "star"  },
+      { "name": "Wind-1",   "x": 400, "y": 220, "vx": 0.5,  "vy": -2.0, "mass": 4,     "color": "#ff4444", "radius": 2,  "type": "gas"   },
+      { "name": "Wind-2",   "x": 460, "y": 260, "vx": 2.0,  "vy": -0.5, "mass": 4,     "color": "#ff4444", "radius": 2,  "type": "gas"   },
+      { "name": "Wind-3",   "x": 460, "y": 340, "vx": 2.0,  "vy": 0.5,  "mass": 4,     "color": "#ff4444", "radius": 2,  "type": "gas"   },
+      { "name": "Wind-4",   "x": 400, "y": 380, "vx": 0.5,  "vy": 2.0,  "mass": 4,     "color": "#ff4444", "radius": 2,  "type": "gas"   },
+      { "name": "Disk-1",   "x": 400, "y": 168, "vx": 2.5,  "vy": 0,    "mass": 60,    "color": "#cc6600", "radius": 4,  "type": "gas"   },
+      { "name": "Disk-2",   "x": 532, "y": 300, "vx": 0,    "vy": 2.5,  "mass": 60,    "color": "#cc6600", "radius": 4,  "type": "gas"   },
+      { "name": "Disk-3",   "x": 400, "y": 432, "vx": -2.5, "vy": 0,    "mass": 60,    "color": "#cc6600", "radius": 4,  "type": "gas"   },
+      { "name": "Disk-4",   "x": 268, "y": 300, "vx": 0,    "vy": -2.5, "mass": 60,    "color": "#cc6600", "radius": 4,  "type": "gas"   }
+    ]
+  },
+  "resonance chain": {
+    "G": 0.42, "description": "Planets in orbital resonance — like TRAPPIST-1",
+    "objects": [
+      { "name": "Star",     "x": 400, "y": 300, "vx": 0,   "vy": 0,   "mass": 14000, "color": "#ff9944", "radius": 20, "type": "star"   },
+      { "name": "Planet-b", "x": 400, "y": 228, "vx": 3.1, "vy": 0,   "mass": 80,    "color": "#ff4466", "radius": 5,  "type": "planet" },
+      { "name": "Planet-c", "x": 400, "y": 200, "vx": 2.7, "vy": 0,   "mass": 90,    "color": "#ff8844", "radius": 5,  "type": "planet" },
+      { "name": "Planet-d", "x": 400, "y": 168, "vx": 2.3, "vy": 0,   "mass": 70,    "color": "#ffaa44", "radius": 5,  "type": "planet" },
+      { "name": "Planet-e", "x": 400, "y": 140, "vx": 2.0, "vy": 0,   "mass": 90,    "color": "#4fffb0", "radius": 5,  "type": "planet" },
+      { "name": "Planet-f", "x": 400, "y": 110, "vx": 1.7, "vy": 0,   "mass": 70,    "color": "#44aaff", "radius": 5,  "type": "planet" },
+      { "name": "Planet-g", "x": 400, "y": 78,  "vx": 1.4, "vy": 0,   "mass": 75,    "color": "#aa44ff", "radius": 5,  "type": "planet" }
+    ]
+  },
+  "stellar flyby": {
+    "G": 0.35, "description": "Rogue star flying through a planetary system",
+    "objects": [
+      { "name": "Host Star",  "x": 400, "y": 300, "vx": 0,   "vy": 0,   "mass": 16000, "color": "#fff200", "radius": 22, "type": "star"   },
+      { "name": "Planet-1",   "x": 400, "y": 200, "vx": 2.5, "vy": 0,   "mass": 100,   "color": "#4fffb0", "radius": 6,  "type": "planet" },
+      { "name": "Planet-2",   "x": 400, "y": 148, "vx": 2.0, "vy": 0,   "mass": 80,    "color": "#4f7cff", "radius": 5,  "type": "planet" },
+      { "name": "Rogue Star",  "x": 780, "y": 100, "vx": -2.2,"vy": 0.5, "mass": 8000,  "color": "#ff4444", "radius": 16, "type": "star"   }
+    ]
+  }
+}
